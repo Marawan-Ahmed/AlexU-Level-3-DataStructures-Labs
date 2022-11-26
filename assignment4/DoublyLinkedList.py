@@ -2,16 +2,21 @@ class Node:
     def __init__(self, data=None):
       self.data = data
       self.next = None
+      self.prev = None
     def getNext(self):
         return self.next
     def setNext(self, next):
         self.next = next
+    def getPrev(self):
+        return self.prev
+    def setPrev(self, prev):
+        self.prev = prev
     def getData(self):
         return self.data
     def setData(self, data):
         self.data = data
       
-class SingleLinkedList: 
+class DoublyLinkedList: 
     def __init__(self):
       self.head = None
       self.size = 0
@@ -23,8 +28,9 @@ class SingleLinkedList:
         else:
             p = self.head
             while (p.getNext() != None):
-                p=p.getNext()
+                p = p.getNext()
             p.setNext(newNode)
+            newNode.setPrev(p)
         self.size += 1
 
     def addIndex (self, data, index):
@@ -36,7 +42,9 @@ class SingleLinkedList:
             p = p.getNext()
         u = p.getNext()
         newNode.setNext(u)
+        newNode.setPrev(p)
         p.setNext(newNode)
+        u.setPrev(newNode)
         self.size += 1
 
     def listPrint(self):
@@ -80,7 +88,9 @@ class SingleLinkedList:
             u = p.getNext()
             w = u.getNext()
             p.setNext(w)
+            w.setPrev(p)
             u.setNext(None)
+            u.setPrev(None)
         self.size -= 1
 
     def clearList(self):
@@ -90,12 +100,12 @@ class SingleLinkedList:
     def sublist(self, startIndex, endIndex):
         if endIndex >= self.size:
             raise TypeError("")
-        if endIndex < startIndex or startIndex < 0 or endIndex <0:
+        if endIndex < startIndex:
             raise TypeError("")
         p = self.head
         for i in range(0,startIndex):
             p = p.getNext()
-        newSublist = SingleLinkedList()
+        newSublist = DoublyLinkedList()
         for i in range(startIndex, endIndex+1):
             newSublist.addLast(p.getData())
             p = p.getNext()
@@ -122,7 +132,7 @@ class SingleLinkedList:
                 self.addLast(data[i])
 
 
-Mylist = SingleLinkedList()
+Mylist = DoublyLinkedList()
 inputList = input()
 Mylist.initializeList(inputList)
 command = input()
@@ -163,7 +173,5 @@ try:
         print(Mylist.listContain(data))
     elif command == "size":
         print(Mylist.size)
-    else:
-        print("Error")
 except:
     print("Error")
