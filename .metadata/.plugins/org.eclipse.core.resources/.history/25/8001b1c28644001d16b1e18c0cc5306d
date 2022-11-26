@@ -1,0 +1,42 @@
+package assignment1;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+interface ICalculator {
+	/**
+	* Adds given two numbers
+	* @param x first number
+	* @param y second number
+	* @return the sum of the two numbers
+	*/
+	int add(int x, int y);
+	/**
+	* Divides two numbers
+	* @param x first number
+	* @param y second number
+	* @return the division result
+	*/
+	float divide(int x, int y) throws RuntimeException;
+}
+
+
+public class Calculator implements ICalculator{
+  /* Implement your calculator class here*/
+	public static void calculator(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	    System.out.println("Enter username");
+
+	    String userName = myObj.nextLine();  // Read user input
+	    System.out.println("Username is: " + userName);  // Output user input	
+	    
+	    String[] splited = userName.split("\\s+");
+	    System.out.println(splited[0]);  // Output user input	
+
+	}
+}

@@ -1,0 +1,71 @@
+package assignment1;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+interface ICalculator {
+	/**
+	* Adds given two numbers
+	* @param x first number
+	* @param y second number
+	* @return the sum of the two numbers
+	*/
+	int add(int x, int y);
+	/**
+	* Divides two numbers
+	* @param x first number
+	* @param y second number
+	* @return the division result
+	*/
+	float divide(int x, int y) throws RuntimeException;
+}
+
+
+public class Calculator implements ICalculator{
+  /* Implement your calculator class here*/
+	public int add(int x, int y) {
+		return x+y
+	}
+	public float divide(int x, int y) {
+		return x/y
+	}
+}
+class Main {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		add myadd = new Calculator.add();
+		divide mydiv = new Calculator.divide();
+		try {
+			Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
+		    System.out.println("Enter Expression");
+	
+		    String expression = myScanner.nextLine();  // Read user input
+		    
+		    String[] splited = expression.split("\\s+");
+		    
+		    int x = Integer.parseInt(splited[0]);
+		    int y = Integer.parseInt(splited[2]);
+	
+		    System.out.println(splited[1]);
+
+		    if (splited[1].charAt(0) == '+')
+		    {
+			    System.out.println(myadd(x,y));
+		    }
+		    else if (splited[1].charAt(0) == '/')
+		    {
+		    	System.out.println(mydiv(x,y));
+		    }
+		    else {
+		    	System.out.println(3);
+		    }
+		}
+		catch(Exception e) {
+	    	System.out.println("Error");
+		}
+	}
+}

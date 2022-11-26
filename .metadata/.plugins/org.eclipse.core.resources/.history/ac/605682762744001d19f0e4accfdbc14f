@@ -1,0 +1,14 @@
+import java.util.Scanner;  // Import the Scanner class
+package assignment1;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	    System.out.println("Enter username");
+
+	    String userName = myObj.nextLine();  // Read user input
+	    System.out.println("Username is: " + userName);  // Output user input	}
+
+}
