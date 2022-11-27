@@ -109,7 +109,6 @@ class SingleLinkedList:
 
     def contains(self, data):
         p = self.head
-<<<<<<< Updated upstream
         for i in range(self.size):
             if p.data == data:
                 return True
@@ -169,64 +168,4 @@ if __name__ == "__main__":
         else:
             print("Error")
     except TypeError:
-=======
-        found = False
-        for i in range (self.size):
-            if p .getData() == data:
-                found = True
-            p = p.getNext() 
-        return found
-    def initializeList(self, data):
-        if data != "[]":
-            data = data[1:-1]
-            data= data.replace(" ", "").split(',')
-            for i in range(len(data)):
-                self.addLast(data[i])
-
-if __name__ == "__main__":
-    Mylist = SingleLinkedList()
-    inputList = input()
-    Mylist.initializeList(inputList)
-    command = input()
-    try:
-        if command == "add":
-            data = input("")
-            Mylist.addLast(data)
-            Mylist.listPrint()
-        elif command == "addToIndex":
-            index = int(input(""))
-            data = input("")
-            Mylist.addIndex(data, index)
-            Mylist.listPrint()
-        elif command == "get":
-            index = int(input(""))
-            print(Mylist.getElement(index))    
-        elif command == "set":
-            index = int(input(""))
-            data = input("")
-            Mylist.setElement(data, index)
-            Mylist.listPrint()
-        elif command == "clear":
-            Mylist.clearList()
-            Mylist.listPrint()
-        elif command == "isEmpty":
-            print(Mylist.isEmpty())
-        elif command == "remove":
-            index = int(input(""))
-            Mylist.removeIndex(index)
-            Mylist.listPrint()
-        elif command == "sublist":
-            startIndex = int(input(""))
-            endIndex = int(input(""))
-            subList = Mylist.sublist(startIndex, endIndex)
-            subList.listPrint()
-        elif command == "contains":
-            data = input("")
-            print(Mylist.listContain(data))
-        elif command == "size":
-            print(Mylist.size)
-        else:
-            print("Error")
-    except:
->>>>>>> Stashed changes
         print("Error")
