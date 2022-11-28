@@ -191,7 +191,6 @@ if __name__ == "__main__":
 
 
 
-
 #p1 = SingleLinkedList()
 #p1.initialize("[32, 41, 67]")
 
