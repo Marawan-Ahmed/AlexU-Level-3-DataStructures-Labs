@@ -71,6 +71,38 @@ def mul(F1, F2):
 def clear(F1):
     F1.clear()
 
+
+def eval(F1, x):
+    result = 0
+    size = F1.size
+    for i in range(size):
+        result = x * result + int(F1.get_element(i))
+    return result
+
+def print_equation(F1):
+    temp = []
+    size = F1.size
+    for power in range(size - 1, -1, -1):
+        coeff = int(F1.get_element(size - power - 1))
+        if coeff == 0:
+            continue
+        temp.append(coeff_format(coeff))
+        temp.append(power_format(power))
+    temp[0] = temp[0].lstrip("+")
+    return ''.join(temp)
+
+def coeff_format(coeff):
+       return str(coeff) if coeff < 0 else "+{0}".format(coeff)
+
+
+def power_format(power):
+    if power ==0:
+        return ''
+    elif power == 1:
+        return 'x'.format(power)
+    else:
+        return 'x^{0}'.format(power)
+
 p1 = SingleLinkedList()
 p1.initialize("[32, 41, 67]")
 
@@ -79,5 +111,6 @@ p2.initialize("[2, 3, 1]")
 
 sum = mul(p1, p2)
 sum.list_print()
-clear(p1)
+print(eval(p2,2))
 p1.list_print()
+print(print_equation(p1))
