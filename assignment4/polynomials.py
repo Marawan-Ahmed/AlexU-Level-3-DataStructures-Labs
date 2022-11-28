@@ -1,6 +1,7 @@
 from SingleLinkedList import *
 
 
+
 def add(F1, F2):
     size1 = F1.size
     size2 = F2.size
@@ -124,6 +125,7 @@ def return_var(input):
 if __name__ == "__main__":
 
     command = input()
+    global R
     R = SingleLinkedList()
     try:
         if command == "set":
@@ -132,14 +134,17 @@ if __name__ == "__main__":
                 raise TypeError("")
             if sym == "A" or "a":
                 Aa = input()
+                global A
                 A = SingleLinkedList()
                 A.initialize(Aa)
             elif sym == "B" or "b":
                 Bb = input()
+                global B
                 B = SingleLinkedList()
                 B.initialize(Bb)
             elif sym == "C" or "c":
                 Cc = input()
+                global C
                 C = SingleLinkedList()
                 C.initialize(Cc)
             else:
@@ -171,15 +176,21 @@ if __name__ == "__main__":
         if command == "add":
             operand1 = return_var(input())
             operand2 = return_var(input())
-            print(print_equation(add(operand1, operand2)))
+            R = add(operand1, operand2)
+            print(print_equation(R))
+
         if command == "sub":
             operand1 = return_var(input())
             operand2 = return_var(input())
-            print(print_equation(sub(operand1, operand2)))
+            R = add(operand1, operand2)
+            print(print_equation(R))
+
         if command == "mult":
             operand1 = return_var(input())
             operand2 = return_var(input())
-            print(print_equation(mul(operand1, operand2)))
+            R = add(operand1, operand2)
+            print(print_equation(R))
+
         if command == "clear":
             clear_letter = return_var(input())
             print(clear(clear_letter))
@@ -187,6 +198,7 @@ if __name__ == "__main__":
             print("Error")
     except TypeError:
         print("Error")
+
 
 
 
