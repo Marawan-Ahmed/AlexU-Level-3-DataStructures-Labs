@@ -1,177 +1,184 @@
 class Node:
     def __init__(self, data=None):
-      self.data = data
-      self.next = None
-      self.prev = None
-    def getNext(self):
-        return self.next
-    def setNext(self, next):
-        self.next = next
-    def getPrev(self):
-        return self.prev
-    def setPrev(self, prev):
-        self.prev = prev
-    def getData(self):
-        return self.data
-    def setData(self, data):
         self.data = data
-      
-class DoublyLinkedList: 
-    def __init__(self):
-      self.head = None
-      self.size = 0
+        self.next = None
+        self.prev = None
 
-    def addLast(self, data):  
-        newNode = Node(data) 
-        if (self.head == None):
-            self.head = newNode
+class DoubleLinkedList:
+    def __init__(self):
+        self.head = None
+        self.size = 0
+
+    def add_last(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
         else:
             p = self.head
-            while (p.getNext() != None):
-                p = p.getNext()
-            p.setNext(newNode)
-            newNode.setPrev(p)
+            while p.next:
+                p = p.next
+            p.next = new_node
+            new_node.prev = p
         self.size += 1
 
-    def addIndex (self, data, index):
+    def add_index(self, data, index):
         if index > self.size or index < 0:
             raise TypeError("")
-        newNode = Node(data)
-        p = self.head
-        for i in range(0,index-1):
-            p = p.getNext()
-        u = p.getNext()
-        newNode.setNext(u)
-        newNode.setPrev(p)
-        p.setNext(newNode)
-        u.setPrev(newNode)
-        self.size += 1
-
-    def listPrint(self):
-        p = self.head
-        print("[", end = ""),
-        while p is not None:
-            if p.getNext() is not None:
-                print (p.data, end = ", ")
-            else:
-                print (p.data, end = "")
-            p = p.getNext()
-        print("]")
-
-    def getElement(self, index):
-        if index >= self.size or index < 0:
-            raise TypeError("")
-        p=self.head
-        for i in range(0,index):
-            p = p.getNext()
-        return p.getData()
-    
-    def setElement(self, data, index):
-        if index >= self.size or index < 0:
-            raise TypeError("")
-        p = self.head
-        for i in range(0,index):
-            p = p.getNext()
-        p.setData(data)
-    
-    def deleteElement(self,index):
-        if index >= self.size or index < 0:
-            raise TypeError("")
+        new_node = Node(data)
         if index == 0:
-            p = self.head
-            self.head = p.getNext()
-            p.setNext(None)
+            new_node.next = self.head
+            self.head = new_node
         else:
             p = self.head
-            for i in range(0,index-1):
-                p = p.getNext()
-            u = p.getNext()
-            w = u.getNext()
-            p.setNext(w)
-            w.setPrev(p)
-            u.setNext(None)
-            u.setPrev(None)
+            for i in range(0, index - 1):
+                p = p.next
+            u = p.next
+            new_node.next = u
+            u.prev = new_node
+            p.next = new_node
+            new_node.prev = p
+        self.size += 1
+
+    def list_print(self):
+        p = self.head
+        print("[", end=""),
+        while p:
+            if p.next:
+                print(p.data, end=", ")
+            else:
+                print(p.data, end="")
+            p = p.next
+        print("]")
+
+    def get_element(self, index):
+        if self.not_in_bound(index):
+            raise TypeError("")
+        p = self.head
+        for i in range(0, index):
+            p = p.next
+        return p.data
+
+    def set_element(self, data, index):
+        if self.not_in_bound(index):
+            raise TypeError("")
+        p = self.head
+        for i in range(0, index):
+            p = p.next
+        p.data = data
+
+    def not_in_bound(self, index) -> bool:
+        return index >= self.size or index < 0
+
+    def delete_element(self, index):
+        if self.not_in_bound(index):
+            raise TypeError("")
+
+        if index == 0:
+            p = self.head
+            self.head = p.next
+        elif index == self.size-1:
+            cur = self.head
+            prev = None
+            for i in range(0, index):
+                prev = cur
+                cur = cur.next
+            nxt = cur.next    
+            prev.next = nxt
+        else:
+            cur = self.head
+            prev = None
+            for i in range(0, index):
+                prev = cur
+                cur = cur.next
+            nxt = cur.next    
+            prev.next = nxt
+            nxt.prev = prev
         self.size -= 1
 
-    def clearList(self):
-        while (self.size > 0):
-            self.deleteElement(0)
+    def clear(self):
+        # while (self.size > 0):
+        #   self.deleteElement(0)
+        self.head = None
+        self.size = 0
 
-    def sublist(self, startIndex, endIndex):
-        if endIndex >= self.size:
-            raise TypeError("")
-        if endIndex < startIndex:
+    def sublist(self, start_index, end_index):
+        if self.not_in_bound(start_index) or \
+                self.not_in_bound(end_index) or \
+                end_index < start_index:
             raise TypeError("")
         p = self.head
-        for i in range(0,startIndex):
-            p = p.getNext()
-        newSublist = DoublyLinkedList()
-        for i in range(startIndex, endIndex+1):
-            newSublist.addLast(p.getData())
-            p = p.getNext()
-        return newSublist
+        for i in range(0, start_index):
+            p = p.next
+        new_sublist = DoubleLinkedList()
+        for i in range(start_index, end_index + 1):
+            new_sublist.add_last(p.data)
+            p = p.next
+        return new_sublist
 
-    def isEmpty(self):
-        if self.size == 0:
+    def is_empty(self):
+        if self.size == 0 or self.head is None:
             return True
         return False
-    
-    def listContain(self, data):
+
+    def contains(self, data):
         p = self.head
-        found = False
-        for i in range (self.size):
-            if p .getData() == data:
-                found = True
-            p = p.getNext() 
-        return found
-    def initializeList(self, data):
-        if data != "[]":
-            data = data[1:-1]
-            data= data.replace(" ", "").split(',')
-            for i in range(len(data)):
-                self.addLast(data[i])
+        for i in range(self.size):
+            if p.data == data:
+                return True
+            p = p.next
+        return False
+
+    def initialize(self, data_):
+        if data_ != "[]":
+            data_ = data_[1:-1]
+            data_ = data_.replace(" ", "").split(',')
+            for i in range(len(data_)):
+                self.add_last(data_[i])
 
 
-Mylist = DoublyLinkedList()
-inputList = input()
-Mylist.initializeList(inputList)
-command = input()
-try:
-    if command == "add":
-        data = input("")
-        Mylist.addLast(data)
-        Mylist.listPrint()
-    elif command == "addToIndex":
-        index = int(input(""))
-        data = input("")
-        Mylist.addIndex(data, index)
-        Mylist.listPrint()
-    elif command == "get":
-        index = int(input(""))
-        print(Mylist.getElement(index))    
-    elif command == "set":
-        index = int(input(""))
-        data = input("")
-        Mylist.setElement(data, index)
-        Mylist.listPrint()
-    elif command == "clear":
-        Mylist.clearList()
-        Mylist.listPrint()
-    elif command == "isEmpty":
-        print(Mylist.isEmpty())
-    elif command == "remove":
-        index = int(input(""))
-        Mylist.removeIndex(index)
-        Mylist.listPrint()
-    elif command == "sublist":
-        startIndex = int(input(""))
-        endIndex = int(input(""))
-        subList = Mylist.sublist(startIndex, endIndex)
-        subList.listPrint()
-    elif command == "contains":
-        data = input("")
-        print(Mylist.listContain(data))
-    elif command == "size":
-        print(Mylist.size)
-except:
-    print("Error")
+if __name__ == "__main__":
+    try:
+        my_list = DoubleLinkedList()
+        input_list = input()
+        my_list.initialize(input_list)
+        command = input()
+        if command == "add":
+            data = input()
+            my_list.add_last(data)
+            my_list.list_print()
+        elif command == "addToIndex":
+            index = int(input())
+            data = input()
+            my_list.add_index(data, index)
+            my_list.list_print()
+        elif command == "get":
+            index = int(input())
+            print(my_list.get_element(index))
+        elif command == "set":
+            index = int(input())
+            data = input()
+            my_list.set_element(data, index)
+            my_list.list_print()
+        elif command == "clear":
+            my_list.clear()
+            my_list.list_print()
+        elif command == "isEmpty":
+            print(my_list.is_empty())
+        elif command == "remove":
+            index = int(input())
+            my_list.delete_element(index)
+            my_list.list_print()
+        elif command == "sublist":
+            start_index = int(input())
+            end_index = int(input())
+            subList = my_list.sublist(start_index, end_index)
+            subList.list_print()
+        elif command == "contains":
+            data = input()
+            print(my_list.contains(data))
+        elif command == "size":
+            print(my_list.size)
+        else:
+            raise Exception
+    except:
+        print("Error")
