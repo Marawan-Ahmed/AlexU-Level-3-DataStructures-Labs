@@ -218,7 +218,7 @@ def print_equation(F1):
             continue
         if (coeff == 1) and (power == size - 1):
             temp.append(power_format(power))
-        else:    
+        else:
             temp.append(coeff_format(coeff))
             temp.append(power_format(power))
     temp[0] = temp[0].lstrip("+")
@@ -251,105 +251,103 @@ def return_var(input):
     else:
         raise Exception
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     global R
-#     R = SingleLinkedList()
-#     print_times = 0
-#     try:
-#         while (1): 
-#             command = input() 
-#             if command == "set":
-#                 sym = input()
-#                 if sym not in ["A", "a", "B", "b", "C", "c", "R", "r"]:
-#                     raise TypeError("")
-#                 if (sym == "A") or (sym == "a"):
-#                     Aa = input()
-#                     global A
-#                     A = SingleLinkedList()
-#                     A.initialize(Aa)
-#                 elif (sym == "B") or (sym == "b"):
-#                     Bb = input()
-#                     global B
-#                     B = SingleLinkedList()
-#                     B.initialize(Bb)
-#                 elif (sym == "C") or (sym == "c"):
-#                     Cc = input()
-#                     global C
-#                     C = SingleLinkedList()
-#                     C.initialize(Cc)
-#                 else:
-#                     raise TypeError("")
+    global R
+    R = SingleLinkedList()
+    print_times = 0
+    try:
+        while (1):
+            command = input()
+            if command == "set":
+                sym = input()
+                if sym not in ["A", "a", "B", "b", "C", "c", "R", "r"]:
+                    raise TypeError("")
+                if (sym == "A") or (sym == "a"):
+                    Aa = input()
+                    global A
+                    A = SingleLinkedList()
+                    A.initialize(Aa)
+                    if Aa == "[]":
+                        raise Exception
+                elif (sym == "B") or (sym == "b"):
+                    Bb = input()
+                    global B
+                    B = SingleLinkedList()
+                    B.initialize(Bb)
+                    if Bb == "[]":
+                        raise Exception
+                elif (sym == "C") or (sym == "c"):
+                    Cc = input()
+                    global C
+                    C = SingleLinkedList()
+                    C.initialize(Cc)
+                    if Cc == "[]":
+                        raise Exception
+                else:
+                    raise TypeError("")
 
-#             elif command == "print":
-#                 letter_print = input()
-#                 if letter_print not in ["A", "a", "B", "b", "C", "c", "R", "r"]:
-#                     raise TypeError("")
-#                 if (letter_print == "A") or (letter_print == "a"):
-#                     print(print_equation(A))
-#                 elif (letter_print == "B") or (letter_print == "b"):
-#                     print(print_equation(B))
-#                 elif (letter_print == "C") or (letter_print == "c"):
-#                     print(print_equation(C))
-#                 elif (letter_print == "R") or (letter_print == "r"):
-#                     print(print_equation(R))
-#                 print_times+=1
-#                 if print_times == 3:
-#                     break
+            elif command == "print":
+                letter_print = input()
+                if letter_print not in ["A", "a", "B", "b", "C", "c", "R", "r"]:
+                    raise TypeError("")
+                if (letter_print == "A") or (letter_print == "a"):
+                    print(print_equation(A))
+                elif (letter_print == "B") or (letter_print == "b"):
+                    print(print_equation(B))
+                elif (letter_print == "C") or (letter_print == "c"):
+                    print(print_equation(C))
+                elif (letter_print == "R") or (letter_print == "r"):
+                    print(print_equation(R))
+                print_times+=1
+                if print_times == 3:
+                    break
 
-#             elif command == "eval":
-#                 eval_letter = input()
-#                 value = input()
-#                 if (eval_letter == "A") or (eval_letter == "a"):
-#                     print(eval(A, value))
-#                 elif (eval_letter == "B") or (eval_letter == "b"):
-#                     print(eval(B, value))
-#                 elif (eval_letter == "C") or (eval_letter == "c"):
-#                     print(eval(C, value))
-#                 break
-
-#             elif command == "add":
-#                 operand1 = return_var(input())
-#                 operand2 = return_var(input())
-#                 R = add(operand1, operand2)
-#                 print(print_equation(R))
-#                 break
-
-#             elif command == "sub":
-#                 operand1 = return_var(input())
-#                 operand2 = return_var(input())
-#                 R = sub(operand1, operand2)
-#                 print(print_equation(R))
-#                 break
-
-#             elif command == "mult":
-#                 operand1 = return_var(input())
-#                 operand2 = return_var(input())
-#                 R = mul(operand1, operand2)
-#                 print(print_equation(R))
-#                 break
-
-#             elif command == "clear":
-#                 clear_letter = return_var(input())
-#                 print([])
-#                 break
-#             else:
-#                 raise Exception 
-#     except:
-#         print("Error")
+            elif command == "eval":
+                eval_letter = input()
+                value = input()
+                if value.isdigit():
+                    if (eval_letter == "A") or (eval_letter == "a"):
+                        print(eval(A, int(value)))
+                    elif (eval_letter == "B") or (eval_letter == "b"):
+                        print(eval(B, int(value)))
+                    elif (eval_letter == "C") or (eval_letter == "c"):
+                        print(eval(C, int(value)))
+                    else:
+                        raise TypeError("")
+                    break
+                else:
+                    raise TypeError("")
+                break
 
 
 
+            elif command == "add":
+                operand1 = return_var(input())
+                operand2 = return_var(input())
+                R = add(operand1, operand2)
+                print(print_equation(R))
+                break
 
+            elif command == "sub":
+                operand1 = return_var(input())
+                operand2 = return_var(input())
+                R = sub(operand1, operand2)
+                print(print_equation(R))
+                break
 
-p1 = SingleLinkedList()
-p1.initialize("[32, 41, 67]")
+            elif command == "mult":
+                operand1 = return_var(input())
+                operand2 = return_var(input())
+                R = mul(operand1, operand2)
+                print(print_equation(R))
+                break
 
-p2 = SingleLinkedList()
-p2.initialize("[2, 3, 1]")
-
-sum = mul(p1, p2)
-sum.list_print()
-print(eval(p2, 2))
-p1.list_print()
-print(print_equation(p1))
+            elif command == "clear":
+                clear_letter = return_var(input())
+                print([])
+                break
+            else:
+                raise Exception
+    except:
+        print("Error")

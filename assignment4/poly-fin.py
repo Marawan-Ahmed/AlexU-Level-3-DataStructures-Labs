@@ -299,7 +299,7 @@ if __name__ == "__main__":
 
             elif command == "eval":
                 eval_letter = input()
-                value = input()
+                value = int(input())
                 if value.isdigit():
                     if (eval_letter == "A") or (eval_letter == "a"):
                         print(eval(A, value))
